@@ -20,7 +20,40 @@ Toolkit](https://www.npmjs.com/package/apiconnect).  Once installed, type `apic
 -h` to see the overall help (after accepting the licensing agreement):
 
 ```
-apic -h
+$ apic -h
+
+Usage: apic COMMAND OPTIONS
+
+  Options
+  -h, --help        command usage
+  -v, --version     toolkit version
+
+Commands (type apic COMMMAND -h for additional help):
+
+  Creating and validating artifacts
+    config          manage configuration variables
+    create          create development artifacts
+    edit            run the API Designer
+    validate        validate development artifacts
+
+  Creating and testing applications
+    loopback        create and manage LoopBack applications
+    microgateway    create Micro Gateway applications
+    start           start services
+    stop            stop services
+    logs            display service logs
+    props           service properties
+    services        service management
+
+  Publishing to the cloud
+    login           log in to an IBM API Connect cloud
+    logout          log out of an IBM API Connect cloud
+    organizations   manage organizations
+    catalogs        manage catalogs in an organization
+    publish         publish products and APIs to a catalog
+    products        manage products in a catalog
+    apps            manage provider applications
+    drafts          manage APIs and products in drafts
 ```
 
 All the commands use a **command:action** syntax (e.g. `apic
@@ -367,7 +400,7 @@ apic login --username some-user --password some-password --server mgmnthost.com
 apic publish climb-on.yaml
 ```
 
-The **--stage** option can be tacted onto `apic publish` resulting in
+The **--stage** option can be tacked onto `apic publish` resulting in
 the product being staged into a catalog instead of published (products
 have the states of staged, published, deprecated, retired, or archived
 in the catalog):
