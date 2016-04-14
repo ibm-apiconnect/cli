@@ -8,15 +8,15 @@ Shane Claussen, Chief Architect/STSM, API Connect
 
 The API Connect v5 developer toolkit delivers a command line interface
 named `apic` to augment the toolset developers use to create and test
-APIs to be run, managed, and secured by API Connect, and support
-devops engineering tasks aimed at automating continuous
-integration/delivery.
+APIs to be run, managed, and secured by API Connect.  The `apic`
+command set also provides capability to support devops oriented
+engineering tasks (e.g. continuous integration and delivery).
 
 To install and use the `apic` CLI you'll need to get a [Bluemix IBM
 id](https://bluemix.net), provision [API Connect in
 Bluemix](https://new-console.ng.bluemix.net/catalog/services/api-connect),
 and then install the [API Connect Developer
-Toolkit](https://www.npmjs.com/package/apiconnect).  Once installed, type `apicxz          
+Toolkit](https://www.npmjs.com/package/apiconnect).  Once installed, type `apic          
 -h` to see the overall help (after accepting the licensing agreement):
 
 ```
@@ -24,8 +24,8 @@ apic -h
 ```
 
 All the commands use a **command:action** syntax (e.g. `apic
-apps:publish`).  For popular commands the command or action portion is
-optional to simplify usage (e.g `auth:login` -> `login`,
+apps:publish`).  The command or action portion is optional to simplify
+usage for the more popular commands (e.g `auth:login` -> `login`,
 `local:create` -> `create`, `products:publish` -> `publish`,
 `products:list` -> `products`) .  All of the commands take a
 `-h/--help` option which provides the command's usage and a handful of
@@ -46,17 +46,18 @@ apic edit
 
 The API Designer is the graphical design tool provided by the toolkit
 to support most of the capablity available via the other command
-lines.  Although it's likely the most important command in the toolkit
-this article is going to focus on using the command line vs the
-designer to accomplish develop, testing, and publishing tasks. But, if
-this is your first time using the toolkit, it's good to know there's a
-simple graphical alternative.
+lines.  Although `apic edit` is likely the most important command in
+the toolkit, the intention of this article is to focus on the breath
+of the `apic` command line vs the desiginer to support development,
+testing, and publishing tasks. That said, if this is your first time
+using the toolkit, it's good to know there's a simple graphical
+alternative to the command lines.
 
 
 
 #### APIs and Applications
 
-The developer toolkit supports development of API proxies **and** API
+The developer toolkit supports development of API proxies and API
 implementations.  In this article we'll use the term **API** for the
 API proxy and the term **application** for the API implementation.
 
