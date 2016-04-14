@@ -24,9 +24,9 @@ apic -h
 ```
 
 All the commands use a **command:action** syntax (e.g. `apic
-apps:publish`).  The command or action portion is optional to simplify
-usage for the more popular commands (e.g `auth:login` -> `login`,
-`local:create` -> `create`, `products:publish` -> `publish`,
+apps:publish`).  For the most popular commands, either the command or
+action portion is optional to simplify usage (e.g `auth:login` ->
+`login`, `local:create` -> `create`, `products:publish` -> `publish`,
 `products:list` -> `products`) .  All of the commands take a
 `-h/--help` option which provides the command's usage and a handful of
 useful examples (e.g. `apic publish -h`).  Some of the command usages
