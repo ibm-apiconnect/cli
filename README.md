@@ -25,14 +25,19 @@ apic -h
 
 All the commands use a **command:action** syntax (e.g. `apic
 apps:publish`).  For the most popular commands, either the command or
-action portion is optional to simplify usage (e.g `auth:login` ->
-`login`, `local:create` -> `create`, `products:publish` -> `publish`,
-`products:list` -> `products`) .  All of the commands take a
-`-h/--help` option which provides the command's usage and a handful of
-useful examples (e.g. `apic publish -h`).  Some of the command usages
-are annotated with **Stability: prototype** which indicates we are in
-the process of collecting customer feedback on the command and it will
-likely evolve before it's certified for production.
+action portion is optional to simplify usage.  For example:
+
+- apic auth:login -> apic login
+- apic local:create -> apic create
+- apic products:publish -> apic publish
+- apic products:list -> apic products
+
+All of  the commands take a `-h/--help` option which provides the
+command's usage and a handful of useful examples (e.g. `apic publish
+-h`).  Some of the command usages are annotated with **Stability:
+prototype** which indicates we are in the process of collecting
+customer feedback on the command and it will likely evolve before it's
+certified for production.
 
 
 
@@ -331,7 +336,7 @@ APIs to be socialized via developer portals and secured by gateways.
 API Connect defines the concept of an API product (or product for
 short) that's used to compose APIs for publishing.  The product
 enables API product managers to bundle one or more APIs together,
-control the visbility of that product in the developer portal (ie only
+control the visibility of that product in the developer portal (ie only
 let partners x, y, and z can view and subscribe to the product), and
 defines one or more plans to provide application developers a set of
 consumption options.  The products that reference the APIs and define
