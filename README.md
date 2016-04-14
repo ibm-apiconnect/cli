@@ -43,20 +43,19 @@ certified for production.
 
 #### API Designer
 
-Use the `apic edit` command to run the **API Designer**:
+**API Designer** is the graphical design tool provided by the toolkit
+to support most of the capablity available via the other command
+lines.  Use the `apic edit` command to run the API Designer:
 
 ```
 apic edit
 ```
 
-The API Designer is the graphical design tool provided by the toolkit
-to support most of the capablity available via the other command
-lines.  Although `apic edit` is likely the most important command in
-the toolkit, the intention of this article is to focus on the breath
-of the `apic` command line vs the desiginer to support development,
-testing, and publishing tasks. That said, if this is your first time
+Although `apic edit` is likely the most important command in the
+toolkit, the intention of this article is to provide an overview of
+the entire `apic` command set. That said, if this is your first time
 using the toolkit, it's good to know there's a simple graphical
-alternative to the command lines.
+alternative to the CLI.
 
 
 
@@ -65,11 +64,11 @@ alternative to the command lines.
 The developer toolkit supports development of API proxies and API
 implementations.  In this article we'll use the term **API** for the
 API proxy and the term **application** for the API implementation.
-
-API Connect provides first class integrated support for developing APIs and
-applications using the [LoopBack
+The developer toolkit provides a first class integrated development
+environment for producing APIs and applications using the [LoopBack
 framework](https://docs.strongloop.com/display/APIC/Using+LoopBack+with+IBM+API+Connect).
-LoopBack application projects can be created using the loopback command:
+LoopBack application projects can be created using the loopback
+command:
 
 ```
 apic loopback
@@ -82,8 +81,8 @@ applications to be built quickly and easily.  However, the developer
 toolkit was designed with polyglot in mind.  Thus, it can be used to
 create APIs in a language independent manner using
 [OpenAPI/Swagger](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md)
-to proxy to an existing backend implementation **or** it can be used
-to augment applications developed in other languages/frameworks such as
+to proxy to an existing backend implementation or it can be used to
+augment applications developed in other languages/frameworks such as
 [Express.JS](http://expressjs.com), Java,
 [Swift](https://developer.ibm.com/swift/2016/02/26/video-replay-ibm-announces-new-swift-offerings-tools/),
 Go, et al.
@@ -132,8 +131,8 @@ same time:
 apic create --type api --title Routes --product "Climb On"
 ```
 
-Alternatively, you may have created a couple APIs and you want to create a
-product to compose them together:
+Alternatively, you can create a couple APIs and then reference them
+when you create a new product:
 
 ```
 apic create --type api --title Routes
@@ -170,9 +169,9 @@ overview of those commands:
 - **`apic loopback:property`**: Add [additional properties](https://docs.strongloop.com/display/public/APIC/Customizing+models) to a Loopback model.
 - **`apic loopback:remote-method`**: Add [remote methods](https://docs.strongloop.com/display/APIC/Using+LoopBack+with+IBM+API+Connect) to a LoopBack model.
 - **`apic loopback:relation`**: Add [relationships](https://docs.strongloop.com/display/APIC/Creating+model+relations) between LoopBack models.
-- **`apic loopback:export-api-def`**: Export a OpenAPI/Swagger definition from LoopBack models.
-- **`apic loopback:export-api-def`**: Export a OpenAPI/Swagger and a product definition from LoopBack models.
-- **`apic loopback:swagger`**: Generate a LoopBack application from a OpenAPI/Swagger definition.
+- **`apic loopback:export-api-def`**: Export an OpenAPI/Swagger definition from LoopBack models.
+- **`apic loopback:export-api-def`**: Export an OpenAPI/Swagger and a product definition from LoopBack models.
+- **`apic loopback:swagger`**: Generate a LoopBack application from an OpenAPI/Swagger definition.
 
 Note: These commands are annotated with **Stability: prototype**
 because we are looking for feedback on them before we certify them for
@@ -190,18 +189,19 @@ test the API and application using the endpoint exposed by the Micro
 Gateway:
 
 ```
-apic loopbock
-cd projectdir
-# update APIs and/or application
+apic loopback --name climbon
+cd climbon
+# update API and/or application development artifacts
 apic start
-# test
-# update APIs and/or application
-apic start    # restarts the application using the latest artifacts
-# test
+# test the API/application
+# update API and/or application development artifacts
+# restart the services (result is they run off the latest artifact definitions)
+apic start
+# test the API/application
 apic stop
 ```
 
-By default, the actions for the services command work on the project
+By default, the actions for the `services` command work on the project
 or directory relative to where the command was executed enabling
 services for multiple projects to be managed concurrently and
 independently.
@@ -209,7 +209,7 @@ independently.
 Here's a sampling of some useful actions for the services command:
 
 ```
-apic services     # list running services (alias for services:list)
+apic services     # list the local running services (alias for services:list)
 apic start        # start the local services (alias for services:start)
 apic stop         # stop the local services (alias for services:stop)
 apic stop --all   # stop all services across all projects
@@ -217,7 +217,7 @@ apic stop --all   # stop all services across all projects
 
 While running services and testing APIs and applications it's
 typically useful to tail the Micro Gateway and Node.JS LoopBack logs
-using the `apic logs` action.  Here's a couple examples:
+using the `apic logs` command.  Here's a couple examples:
 
 ```
 apic logs                         # view the logs for the default service (alias for services:logs)
@@ -270,22 +270,24 @@ The easiest way to determine the values for these configuration
 variables is to sign in to the API Manager application of your
 provisioned [Bluemix API Connect
 service](https://new-console.ng.bluemix.net/catalog/services/api-connect)
-or your on premises cloud, select the Dashboard, and then click on the
-**link** icon of the catalog or app you want to publish your API or
-application to.  This will provide you with the identifier of the
+or your on premises cloud, and click on the **link** icon of the
+catalog or app you want to publish your API or application to.  The
+dialog that appears will provide you with the identifier of the
 catalog or app along with the appropriate config:set command.
 
 Although setting these configuration variables is not absolutely
-required, they simplify login, publishing, and all the other command
-actions that interact with API Connect clouds by providing default
-values for the --server, --organization, --catalog, and --app options.
+required, they simplify all the command actions that interact with API
+Connect clouds by providing default values for the --server,
+--organization, --catalog, and --app options.
 
-Below is an example of using `apic publish` without the catalog
-configuration followed by an example of `apic publish` where the
-catalog configuration variable is set:
+Below is an example of using `apic publish` with and without the
+catalog configuration variable begin set:
 
 ```
+# Without
 apic publish climb-on.yaml --server mgmnthost.com --organization climbon --catalog sb
+
+# With
 apic config:set catalog=apic-catalog://mgmnthost.com/orgs/climbon/catalogs/sb
 apic publish climb-on.yaml
 ```
@@ -298,6 +300,14 @@ target the Quality Assurance catalog by using the --catalog option:
 
 ```
 apic publish climb-on.yaml --catalog qa
+```
+
+Don't forget about global configuration variables.  If you use the
+same catalog as the default target for multiple projects set the value
+globally:
+
+```
+apic config:set --global catalog=apic-catalog://mgmnthost.com/orgs/climbon/catalogs/sb
 ```
 
 
@@ -337,16 +347,16 @@ API Connect defines the concept of an API product (or product for
 short) that's used to compose APIs for publishing.  The product
 enables API product managers to bundle one or more APIs together,
 control the visibility of that product in the developer portal (ie only
-let partners x, y, and z can view and subscribe to the product), and
+allow partners x, y, and z view and subscribe to the product), and
 defines one or more plans to provide application developers a set of
 consumption options.  The products that reference the APIs and define
 the consumption plans are also the primary unit of lifecycle
 management for APIs.
 
 The `apic publish` (alias for `apic products:publish`) command is used
-to publish API products to an API Connect cloud.  Here's a full
-lifecycle from create to publish for a couple APIs contained by a
-product:
+to publish API products to an API Connect cloud.  The example below
+demonstrates creation of a couple APIs composed by a product and how
+to publish that product and its APIs to a catalog:
 
 ```
 apic create --type api --title Routes
@@ -357,8 +367,10 @@ apic login --username some-user --password some-password --server mgmnthost.com
 apic publish climb-on.yaml
 ```
 
-To add the product into a catalog without publishing it the **--stage**
-option can be used:
+The **--stage** option can be tacted onto `apic publish` resulting in
+the product being staged into a catalog instead of published (products
+have the states of staged, published, deprecated, retired, or archived
+in the catalog):
 
 ```
 apic publish --stage climb-on.yaml
@@ -396,8 +408,10 @@ apic publish definitions/climbon-product.yaml
 
 In addition to the LoopBack APIs, the LoopBack application itself must
 also be published to an API Connect app which represents a Node.JS
-runtime.  The following two commands could be added to the above set
-to complete publishing process for the LoopBack application:
+runtime.  Adding the following two commands to the above set will
+result in publishing the LoopBack application (Note: apps:publish must
+be run from within the LoopBack application project directory
+structure):
 
 ```
 apic config:set app=apic-app://mgmnthost.com/orgs/climbon/apps/sb-app
@@ -405,18 +419,19 @@ apic apps:publish
 ```
 
 If the LoopBack application is being published to Bluemix, the API
-Connect app can optionally be created in the organization on the fly.
-In that case, the app configuration variable does not have to be set
-and the --app option on `apps:publish` is not required.
+Connect app can optionally be created in the organization on the fly
+as a side effect of apps:publish.  In that case, the app configuration
+variable does not have to be set and the --app option on
+`apps:publish` is not required.
 
 
 
 #### Managing API Products
 
-The `apic products` and `apic apis` commands can be used to manage
+The `apic products` and `apic apis` command sets can be used to manage
 products and APIs that have been published to API Connect catalogs.
 Here's a sample for how the `products` and `apis` commands can be used
-to perform simple lifecycle actions for a product and API:
+for a cradle to grave lifecycle example:
 
 ```
 apic config:set catalog=apic-catalog://mgmnthost.com/orgs/climbon/catalogs/sb    # set the default catalog
@@ -432,7 +447,7 @@ apic apis:set routes --status offline                                           
 apic apis:set routes --status online                                             # bring the API online
 apic products:set climbon --status deprecated                                    # deprecate the product
 apic products:set climbon --status retired                                       # retire the product
-apic products:set climbon --status archive                                       # archive the product
+apic products:set climbon --status archived                                      # archive the product
 apic products:delete climbon                                                     # delete the product from the catalog
 ```
 
@@ -441,8 +456,9 @@ where a new version of a product and API hot replaces the original
 version:
 
 ```
-apic config:set catalog=apic-catalog://mgmnthost.com/orgs/climbon/catalogs/sb    # set the default catalog
-apic login --username some-user --password some-password --server mgmnthost.com  # login into the mgmnthost.com cloud
+# Set the default catalog and login to the mgmnthost.com API Connect cloud
+apic config:set catalog=apic-catalog://mgmnthost.com/orgs/climbon/catalogs/sb
+apic login --username some-user --password some-password --server mgmnthost.com
 
 # Create and publish an initial version
 apic create --type api --title Routes --version 1.0.0 --filename routes100.yaml
@@ -453,6 +469,11 @@ apic publish climbon100.yaml
 apic create --type api --title Routes --version 1.0.1 --filename routes101.yaml
 apic create --type product --title "Climb On" --version 1.0.1 --filename climbon101.yaml --apis routes101.yaml
 apic publish --stage climbon101.yaml
+
+# Inspect the catalog
+apic products
+apic products:get climbon:1.0.0
+apic products:get climbon:1.0.1
 
 # Hot replace version 1.0.0 with 1.0.1
 apic products:replace climbon:1.0.0 climbon:1.0.1 --plans default:default
@@ -469,7 +490,7 @@ apic apis:pull routes:1.0.0       # download the routes:1.0.0 API from the catal
 ```
 
 It's also sometimes useful to clear all products and their APIs from a
-catalog particular for sandbox typed catalogs (this action requires
+catalog particularly for sandbox typed catalogs (this action requires
 the name of the catalog as a confirmation parameter):
 
 ```
@@ -480,21 +501,21 @@ apic products:clear --confirm CATALOG_NAME
 
 #### Drafts
 
-We encourage developers to co-locate their APIs and applications
-together in their local source code control systems to support the
-typical design time iterative lifecycle activities like commits,
-branching, merges, continuous integration, et al.  We believe the
-developer toolkit provides the bridge from the developer's environment
-and the API Connect runtime services.
+We encourage developers to co-locate their APIs and applications in
+their local source code control systems to support the typical design
+time iterative lifecycle activities like commits, branching, merges,
+continuous integration, et al.  We believe the developer toolkit
+provides the bridge from the developer's environment and the API
+Connect runtime services.
 
 That said, API Connect does provide an online development sandbox
-environment named **Drafts** where API and product definitions can be
-developed.  The toolkit provides the `apic drafts` command to enable
-synchronization of product and API artifacts from the developer's
-local source code control systems to Drafts as required.
+capability named **Drafts** where API and product definitions can be
+defined.  The toolkit provides the `apic drafts` command set to enable
+synchronization of product and API artifacts between the developer's
+local source code control systems and drafts.
 
-Similar to the `products` and `apis` commands `drafts` can be used to
-push, pull, and clone artifacts as follows:
+Similar to the `products` and `apis` command sets, `drafts` can be
+used to push, pull, and clone artifacts as follows:
 
 ```
 apic config:set catalog=apic-catalog://mgmnthost.com/orgs/climbon/catalogs/sb    # set the default catalog
@@ -510,8 +531,9 @@ apic drafts:clone                                         # pull every product/a
 apic drafts:clear --confirm drafts                        # clear drafts collection
 ```
 
-In addition to synchronizing data between the toolkit and drafts,
-products containing APIs in drafts can be published:
+In addition to synchronizing data between the developer's source code
+control systems and drafts, products that are in drafts can be
+published:
 
 ```
 apic config:set catalog=apic-catalog://mgmnthost.com/orgs/climbon/catalogs/sb    # set the default catalog
@@ -524,8 +546,8 @@ apic drafts:publish climbon
 
 Again, although it's possible to develop products and APIs in drafts,
 and to use the CLI or the drafts user experience to publish products
-from drafts to a catalog, our recommendation it to clone all your
-products and apis from drafts, check them into a local source code
+from drafts to a catalog, our recommendation is to clone all your
+products and apis from drafts, check them into your local source code
 control system, and then publish directly from there to your catalogs
 using your source code control system, its tags, service branches, et
 al, as your master of record.
