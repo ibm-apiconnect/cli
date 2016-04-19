@@ -1,10 +1,10 @@
-# API Connect v5: Developer Toolkit Command Line Interface
+# API Connect v5 Getting Started: Developer Toolkit Command Line Interface
 
-Shane Claussen, Chief Architect/STSM, API Connect
+[Shane Claussen](mailto:claussen@us.ibm.com), Chief Architect, API Connect
 
 
 
-#### Introduction
+# Introduction
 
 The API Connect v5 developer toolkit delivers a command line interface
 named `apic` to augment the toolset developers use to create and test
@@ -14,7 +14,7 @@ engineering tasks (e.g. continuous integration and delivery).
 
 To install and use the `apic` CLI you'll need to get a [Bluemix IBM
 id](https://bluemix.net), provision [API Connect in
-Bluemix](https://new-console.ng.bluemix.net/catalog/services/api-connect),
+Bluemix (free)](https://new-console.ng.bluemix.net/catalog/services/api-connect),
 and then install the [API Connect Developer
 Toolkit](https://www.npmjs.com/package/apiconnect).  Once installed, type `apic          
 -h` to see the overall help (after accepting the licensing agreement):
@@ -74,7 +74,7 @@ certified for production.
 
 
 
-#### API Designer
+# API Designer
 
 **API Designer** is the graphical design tool provided by the toolkit
 to support most of the capablity available via the other command
@@ -92,7 +92,7 @@ alternative to the CLI.
 
 
 
-#### APIs and Applications
+# APIs and Applications
 
 The developer toolkit supports development of API proxies and API
 implementations.  In this article we'll use the term **API** for the
@@ -134,7 +134,7 @@ definitions to **API Connect Catalogs**.
 
 
 
-#### Creating Development Artifact Definitions
+# Creating Development Artifact Definitions
 
 Development artifacts (e.g. OpenAPI/Swagger definitions, API product
 definitions, LoopBack models, and LoopBack data sources) can be created using
@@ -175,7 +175,7 @@ apic create --type product --title "Climb On" --apis "routes.yaml ascents.yaml"
 
 
 
-#### Validating Development Artifact Definitions
+# Validating Development Artifact Definitions
 
 
 Once you edit the development artifacts or right before you publish the
@@ -189,7 +189,7 @@ apic validate climb-on.yaml --product-only     # Validate the product only (do n
 
 
 
-#### Updating LoopBack Applications
+# Updating LoopBack Applications
 
 Once you've created a LoopBack application using `apic loopback` there
 are a number of useful commands for updating the application.  These
@@ -212,7 +212,7 @@ production.
 
 
 
-#### Managing Services
+# Managing Services
 
 The `services` command can be used to manage running processes for
 testing APIs and applications.  For example, the following commands
@@ -271,7 +271,7 @@ apic props:clear                   # Clear all the properties on the default ser
 
 
 
-#### Configuration Variables
+# Configuration Variables
 
 The `apic config` command provides global and project based
 configuration variables.  These configuration variables will grow over
@@ -345,7 +345,7 @@ apic config:set --global catalog=apic-catalog://mgmnthost.com/orgs/climbon/catal
 
 
 
-#### API Connect Cloud Authentication
+# API Connect Cloud Authentication
 
 The `apic login` and `apic logout` (aliases for auth:login and
 auth:logout) commands are used to manage your authentication
@@ -371,7 +371,7 @@ Scripted non-interactive login can be accomplished using the --server,
 
 
 
-#### Publishing APIs
+# Publishing APIs
 
 Publishing APIs to API catalogs in API Connect clouds enables those
 APIs to be socialized via developer portals and secured by gateways.
@@ -411,7 +411,7 @@ apic publish --stage climb-on.yaml
 
 
 
-#### Publishing LoopBack APIs and Applications
+# Publishing LoopBack APIs and Applications
 
 LoopBack application projects contain both APIs and applications.  The
 same `apic publish` command described above is used to publish the
@@ -459,7 +459,7 @@ variable does not have to be set and the --app option on
 
 
 
-#### Managing API Products
+# Managing API Products
 
 The `apic products` and `apic apis` command sets can be used to manage
 products and APIs that have been published to API Connect catalogs.
@@ -532,7 +532,7 @@ apic products:clear --confirm CATALOG_NAME
 
 
 
-#### Drafts
+# Drafts
 
 We encourage developers to co-locate their APIs and applications in
 their local source code control systems to support the typical design
@@ -584,3 +584,22 @@ products and apis from drafts, check them into your local source code
 control system, and then publish directly from there to your catalogs
 using your source code control system, its tags, service branches, et
 al, as your master of record.
+
+
+# Summary
+
+I hope you found the information above on the `apic` command useful!
+Feel free to [contact me](emailto:claussen@us.ibm.com) to ask
+questions or to provide feedback.
+
+
+
+# Additional Resources
+
+For additional resources pay close attention to the following:
+
+- [API Connect v5 Getting Started: Developing, Testing, and Publishing an API to Bluemix using `apic`](https://github.com/ibm-apiconnect/climbingweather)
+- [API Connect v5 Getting Started: API Products](https://github.com/ibm-apiconnect/product)
+- [API Connect Developer Center](https://developer.ibm.com/apiconnect)
+- [API Connect v5 Knowledge Center](http://www.ibm.com/support/knowledgecenter/SSMNED_5.0.0/mapfiles/ic_home.html)
+- [Follow us @ibmapiconnect](https://twitter.com/ibmapiconnect)
