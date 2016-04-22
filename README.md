@@ -95,10 +95,11 @@ alternative to the CLI.
 # APIs and Applications
 
 The developer toolkit supports development of API proxies and API
-implementations.  In this article we'll use the term **API** for the
-API proxy and the term **application** for the API implementation.
-The developer toolkit provides a first class integrated development
-environment for producing APIs and applications using the [LoopBack
+implementations.  In this article we'll use the term **API** when
+we're referring to the API proxy and the term **application** when
+we're referring to the API implementation.  The developer toolkit
+provides a first class integrated development environment for
+developing APIs and applications using the [LoopBack
 framework](https://docs.strongloop.com/display/APIC/Using+LoopBack+with+IBM+API+Connect).
 LoopBack application projects can be created using the loopback
 command:
@@ -113,7 +114,7 @@ which has a proven track record for enabling interaction tier
 applications to be built quickly and easily.  However, the developer
 toolkit was designed with polyglot in mind.  Thus, it can be used to
 create APIs in a language independent manner using
-[OpenAPI/Swagger](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md)
+[OpenAPI (Swagger)](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md)
 to proxy to an existing backend implementation or it can be used to
 augment applications developed in other languages/frameworks such as
 [Express.JS](http://expressjs.com), Java,
@@ -129,14 +130,14 @@ App** which provides Node.JS runtime capability.
 
 Developers who want to proxy to existing backend services or who are
 developing their applications using other languages or frameworks use
-**OpenAPI projects** that support publishing the OpenAPI/Swagger
+**OpenAPI projects** that support publishing the OpenAPI (Swagger)
 definitions to **API Connect Catalogs**.
 
 
 
 # Creating Development Artifact Definitions
 
-Development artifacts (e.g. OpenAPI/Swagger definitions, API product
+Development artifacts (e.g. OpenAPI (Swagger) definitions, API product
 definitions, LoopBack models, and LoopBack data sources) can be created using
 the `apic create` command.  Use the following CLIs to create the different
 definition types interactively:
@@ -202,9 +203,9 @@ overview of those commands:
 - **`apic loopback:property`**: Add [additional properties](https://docs.strongloop.com/display/public/APIC/Customizing+models) to a Loopback model.
 - **`apic loopback:remote-method`**: Add [remote methods](https://docs.strongloop.com/display/APIC/Using+LoopBack+with+IBM+API+Connect) to a LoopBack model.
 - **`apic loopback:relation`**: Add [relationships](https://docs.strongloop.com/display/APIC/Creating+model+relations) between LoopBack models.
-- **`apic loopback:export-api-def`**: Export an OpenAPI/Swagger definition from LoopBack models.
-- **`apic loopback:export-api-def`**: Export an OpenAPI/Swagger and a product definition from LoopBack models.
-- **`apic loopback:swagger`**: Generate a LoopBack application from an OpenAPI/Swagger definition.
+- **`apic loopback:export-api-def`**: Export an OpenAPI (Swagger) definition from LoopBack models.
+- **`apic loopback:export-api-def`**: Export an OpenAPI (Swagger) and a product definition from LoopBack models.
+- **`apic loopback:swagger`**: Generate a LoopBack application from an OpenAPI (Swagger) definition.
 
 Note: These commands are annotated with **Stability: prototype**
 because we are looking for feedback on them before we certify them for
@@ -222,7 +223,7 @@ test the API and application using the endpoint exposed by the Micro
 Gateway:
 
 ```
-apic loopback --name climbon
+apic loopback # climbon project name/directory
 cd climbon
 # update API and/or application development artifacts
 apic start
@@ -427,7 +428,7 @@ models.  Here's a sample CLI narrative for developing and publishing
 LoopBack APIs to illustrate that scenario:
 
 ```
-apic loopback --name climbon
+apic loopback # climbon project name/directory
 cd climbon
 apic create --type model           # as many times as required
 apic loopback:property             # as many times as required
@@ -500,7 +501,7 @@ apic publish climbon100.yaml
 
 # Create a new version to fix a bug in the API, stage it to the catalog
 apic create --type api --title Routes --version 1.0.1 --filename routes101.yaml
-apic create --type product --title "Climb On" --version 1.0.1 --filename climbon101.yaml --apis routes101.yaml
+apic create --type product --title "Climb On" --version 1.0.1 --apis routes101.yaml --filename climbon101.yaml
 apic publish --stage climbon101.yaml
 
 # Inspect the catalog
