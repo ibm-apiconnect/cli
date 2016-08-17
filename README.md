@@ -602,5 +602,5 @@ For additional resources pay close attention to the following:
 - [API Connect v5 Getting Started: Developing, Testing, and Publishing an API to Bluemix using `apic`](https://github.com/ibm-apiconnect/climbingweather)
 - [API Connect v5 Getting Started: API Products](https://github.com/ibm-apiconnect/product)
 - [API Connect Developer Center](https://developer.ibm.com/apiconnect)
-- [API Connect v5 Knowledge Center](http://www.ibm.com/support/knowledgecenter/SSMNED_5.0.0/mapfiles/ic_home.html)
+- [API Connect v5 Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSMNED_5.0.0/mapfiles/getting_started.html)
 - [Follow us @ibmapiconnect](https://twitter.com/ibmapiconnect)
